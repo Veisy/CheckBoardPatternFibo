@@ -79,16 +79,16 @@ public class CheckerBoardMain {
     private static int fillNumber(long[] numberArray, NumberOfDigits digitNumbersOfNumberArray, int width, int position) {
         // Default values to use when there is no input.
         int space = width - 1;
-        long numberToFill = 0;
+        String fillWith = "-";
 
         if (numberArray.length > position) {
-            numberToFill = numberArray[position];
+            fillWith = String.valueOf(numberArray[position]);
             //Subtracting the digit number of current fibonacci number from the width,
             //which determines the required spacing.
             space = width - digitNumbersOfNumberArray.getNumberOfDigits()[position];
 
         }
-        System.out.print(numberToFill);
+        System.out.print(fillWith);
         return space;
     }
 
