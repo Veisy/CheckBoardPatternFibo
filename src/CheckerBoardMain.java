@@ -51,20 +51,15 @@ public class CheckerBoardMain {
             System.out.print("| ");
             for (int j = 1; j <= dimension; j++) {
 
-                int spaces;
+                int space;
                 if ( (i + j) % 2 == 0) {
-                    System.out.print(whiteNumberArray[whiteCount]);
-                    //Subtracting the digit number of current fibonacci number from the width,
-                    //which determines the required spacing.
-                    spaces = width - numberOfDigitsWhite.getNumberOfDigits()[whiteCount];
+                    space = fillNumber(whiteNumberArray, numberOfDigitsWhite, width, whiteCount);
                     whiteCount++;
-
                 } else {
-                    System.out.print(blackNumberArray[blackCount]);
-                    spaces = width - numberOfDigitsBlack.getNumberOfDigits()[blackCount];
+                    space = fillNumber(blackNumberArray, numberOfDigitsBlack, width, blackCount);
                     blackCount++;
                 }
-                for (int k = 0; k < spaces; k++) {
+                for (int k = 0; k < space; k++) {
                     System.out.print(" ");
                 }
 
@@ -78,6 +73,23 @@ public class CheckerBoardMain {
             decorate(dimension, width, 1);
 
         }
+    }
+
+    // Fill the board with a number.
+    private static int fillNumber(long[] numberArray, NumberOfDigits digitNumbersOfNumberArray, int width, int position) {
+        // Default values to use when there is no input.
+        int space = width - 1;
+        long numberToFill = 0;
+
+        if (numberArray.length > position) {
+            numberToFill = numberArray[position];
+            //Subtracting the digit number of current fibonacci number from the width,
+            //which determines the required spacing.
+            space = width - digitNumbersOfNumberArray.getNumberOfDigits()[position];
+
+        }
+        System.out.print(numberToFill);
+        return space;
     }
 
     private static void decorate(int dimension, int width, int decorationOption) {
