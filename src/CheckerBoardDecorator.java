@@ -2,41 +2,31 @@ final public class CheckerBoardDecorator {
 
     private CheckerBoardDecorator() {}
 
-    public static void checkerBoard(long[] whiteNumberArray, long[] blackNumberArray) {
+    public static void checkerBoard(long[] numberArray) {
 
-        // Dimension determined by longest array.
-        // We take the longer array, double it to create space for other array, take root of this number to obtain dimension.
-        int dimension = (int) Math.ceil(Math.sqrt(2 * Math.max(whiteNumberArray.length, blackNumberArray.length))) ;
+        // Take the root of the number length to obtain dimension.
+        int dimension = (int) Math.ceil(Math.sqrt(numberArray.length)) ;
 
-        // Instantiate NumberOfDigits classes which contains all the element size information about the long arrays entered.
+        // Instantiate NumberOfDigits class which contains all the element size information about the long array entered.
         // We will use the number of digits to evenly space the checkerboard.
-        NumberOfDigits numberOfDigitsWhite = new NumberOfDigits(whiteNumberArray);
-        NumberOfDigits numberOfDigitsBlack = new NumberOfDigits(blackNumberArray);
+        NumberOfDigits numberOfDigits = new NumberOfDigits(numberArray);
 
         //Width determined by biggest number in the board.
-        int width = Math.max(numberOfDigitsWhite.getGreatestNumberOfDigit(), numberOfDigitsBlack.getGreatestNumberOfDigit());
+        int width = numberOfDigits.getGreatestNumberOfDigit();
 
         // Decorate topmost with one layer '--------' characters.
         decorate(dimension, width, 2);
 
-        int whiteCount = 0;
-        int blackCount = 0;
-        for (int i = 1; i <= dimension; i++) {
+        for (int i = 0; i < dimension; i++) {
 
             //Decorate top of the rows with one layer '|     |     | ...' characters.
             decorate(dimension, width, 3);
 
             System.out.print("| ");
-            for (int j = 1; j <= dimension; j++) {
+            for (int j = 0; j < dimension; j++) {
 
-                int space;
-                if ( (i + j) % 2 == 0) {
-                    space = fillNumber(whiteNumberArray, numberOfDigitsWhite, width, whiteCount);
-                    whiteCount++;
-                } else {
-                    space = fillNumber(blackNumberArray, numberOfDigitsBlack, width, blackCount);
-                    blackCount++;
-                }
+                int space = fillNumber(numberArray, numberOfDigits, width, (i * dimension) + j);
+
                 for (int k = 0; k < space; k++) {
                     System.out.print(" ");
                 }
