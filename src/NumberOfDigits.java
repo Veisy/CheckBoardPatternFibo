@@ -20,8 +20,16 @@ public class NumberOfDigits {
         int tempNumberOfDigit;
 
         for (int i = 0; i < inputArray.length; i++) {
-            tempNumberOfDigit = (int) Math.log10(inputArray[i]) + 1;
+            if (inputArray[i] == 0) {
+                tempNumberOfDigit = 1;
+            } else if (inputArray[i] < 0){
+                tempNumberOfDigit = (int) Math.log10(Math.abs(inputArray[i])) + 2;
+            } else {
+                tempNumberOfDigit = (int) Math.log10(inputArray[i]) + 1;
+            }
+
             numberOfDigits[i] = tempNumberOfDigit;
+
             if (tempNumberOfDigit > greatestNumberOfDigit) {
                 greatestNumberOfDigit = tempNumberOfDigit;
             }
