@@ -1,17 +1,21 @@
+import java.util.Random;
+
 public class CheckerBoardMain {
 
     public static void main(String[]args){
 
-        //Dimension of checker board.
-        int dimension = 8;
+        final int ARRAY_SIZE_BOUND = 100;
 
-        // Instantiate Fibonacci class which holds all information about requested series.
-        Fibonacci fibonacci = new Fibonacci(1, 2, dimension * dimension);
-        long[] fibonacciNumbers = fibonacci.getFibonacciNumbers();
+        Random random = new Random();
+        int arraySize = random.nextInt(ARRAY_SIZE_BOUND);
+        double[] randomDoubleArray = new double[arraySize];
+        for (int i = 0; i < randomDoubleArray.length; i++) {
+            randomDoubleArray[i] = random.nextDouble();
+        }
 
         // Create checker board pattern.
-        // This version only accepts one array.
-        CheckerBoardDecorator.checkerBoard(fibonacciNumbers);
+        // This version only accepts one double array.
+        CheckerBoardDecorator.checkerBoard(randomDoubleArray);
     }
 
 }

@@ -2,17 +2,17 @@ final public class CheckerBoardDecorator {
 
     private CheckerBoardDecorator() {}
 
-    public static void checkerBoard(long[] numberArray) {
+    public static void checkerBoard(double[] numberArray) {
 
         // Take the root of the number length to obtain dimension.
         int dimension = (int) Math.ceil(Math.sqrt(numberArray.length)) ;
 
-        // Instantiate NumberOfDigits class which contains all the element size information about the long array entered.
-        // We will use the number of digits to evenly space the checkerboard.
-        NumberOfDigits numberOfDigits = new NumberOfDigits(numberArray);
+        // Instantiate NumberOfChars class which contains all the element size information about the array entered.
+        // We will use the number of chars to evenly space the checkerboard.
+        NumberOfChars numberOfChars = new NumberOfChars(numberArray);
 
         //Width determined by biggest number in the board.
-        int width = numberOfDigits.getGreatestNumberOfDigit();
+        int width = numberOfChars.getGreatestNumberOfChar();
 
         // Decorate topmost with one layer '--------' characters.
         decorate(dimension, width, 2);
@@ -25,7 +25,7 @@ final public class CheckerBoardDecorator {
             System.out.print("| ");
             for (int j = 0; j < dimension; j++) {
 
-                int space = fillNumber(numberArray, numberOfDigits, width, (i * dimension) + j);
+                int space = fillNumber(numberArray, numberOfChars, width, (i * dimension) + j);
 
                 for (int k = 0; k < space; k++) {
                     System.out.print(" ");
@@ -44,16 +44,16 @@ final public class CheckerBoardDecorator {
     }
 
     // Fill the board with a number.
-    private static int fillNumber(long[] numberArray, NumberOfDigits digitNumbersOfNumberArray, int width, int position) {
+    private static int fillNumber(double[] numberArray, NumberOfChars digitNumbersOfNumberArray, int width, int position) {
         // Default values to use when there is no input.
         int space = width - 1;
         String fillWith = "-";
 
         if (numberArray.length > position) {
             fillWith = String.valueOf(numberArray[position]);
-            //Subtracting the digit number of current fibonacci number from the width,
+            //Subtracting the digit number from the width,
             //which determines the required spacing.
-            space = width - digitNumbersOfNumberArray.getNumberOfDigits()[position];
+            space = width - digitNumbersOfNumberArray.getNumberOfChars()[position];
 
         }
         System.out.print(fillWith);
